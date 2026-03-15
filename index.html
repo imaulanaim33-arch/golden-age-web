@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Golden Age Islamic School Montessori – Beranda</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .hero{min-height:100vh;padding:calc(var(--nav-height)+60px) 40px 80px;display:flex;align-items:center;background:linear-gradient(135deg,#f0f7f2 0%,#e8f5ec 50%,#d8f3dc 100%);position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;top:-150px;right:-150px;width:700px;height:700px;background:radial-gradient(circle,rgba(201,168,76,0.15) 0%,transparent 70%);border-radius:50%;animation:float 8s ease-in-out infinite}
+    .hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(26,77,46,0.08) 0%,transparent 70%);border-radius:50%}
+    .hero-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:1}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:white;padding:8px 18px;border-radius:25px;font-size:13px;font-weight:700;color:var(--green);box-shadow:var(--shadow-sm);margin-bottom:20px;border:1px solid var(--green-pale)}
+    .hero-title{font-family:'Playfair Display',serif;font-size:52px;font-weight:800;line-height:1.1;margin-bottom:20px;color:var(--green)}
+    .hero-title .hl{color:var(--gold);position:relative}
+    .hero-title .hl::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:8px;background:rgba(201,168,76,0.2);border-radius:4px;z-index:-1}
+    .hero-desc{font-size:17px;color:var(--text-light);line-height:1.8;margin-bottom:32px}
+    .hero-btns{display:flex;gap:16px;flex-wrap:wrap}
+    .hero-visual{position:relative;display:flex;justify-content:center}
+    .hero-circle{width:400px;height:400px;background:linear-gradient(135deg,var(--green),var(--green-mid));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:160px;box-shadow:0 24px 64px rgba(26,77,46,0.35);animation:float 6s ease-in-out infinite}
+    .floating-card{position:absolute;background:white;border-radius:16px;padding:12px 16px;box-shadow:var(--shadow-md);display:flex;align-items:center;gap:10px;font-weight:700;font-size:13px}
+    .floating-card.fc1{top:20px;right:-10px;animation:float 4s ease-in-out infinite 1s}
+    .floating-card.fc2{bottom:40px;left:-10px;animation:float 5s ease-in-out infinite 2s}
+    .fc-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}
+    .programs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+    .program-card{background:white;border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);transition:var(--transition);text-decoration:none;color:inherit;display:block}
+    .program-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-md)}
+    .program-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:70px}
+    .program-body{padding:20px}
+    .program-tag{display:inline-block;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:10px}
+    .program-body h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;margin-bottom:8px;color:var(--green)}
+    .program-body p{font-size:13px;color:var(--text-light);line-height:1.6;margin-bottom:14px}
+    .program-link{font-size:13px;font-weight:700;color:var(--gold)}
+    .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+    .why-list{display:flex;flex-direction:column;gap:20px}
+    .why-item{display:flex;gap:16px}
+    .why-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+    .why-text h4{font-weight:800;font-size:16px;margin-bottom:6px;color:var(--green)}
+    .why-text p{font-size:14px;color:var(--text-light);line-height:1.6}
+    .why-img-box{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,var(--green),var(--green-mid));border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;font-size:100px;box-shadow:var(--shadow-lg)}
+    .act-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+    .act-card{border-radius:var(--radius-md);overflow:hidden;text-decoration:none;color:inherit;box-shadow:var(--shadow-sm);display:flex;transition:var(--transition)}
+    .act-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+    .act-thumb{width:140px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:60px}
+    .act-body{padding:24px;flex:1;background:white}
+    .act-body h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--green)}
+    .act-body p{font-size:14px;color:var(--text-light);line-height:1.6;margin-bottom:14px}
+    .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .testi-card{background:white;border-radius:var(--radius-md);padding:28px;box-shadow:var(--shadow-sm)}
+    .testi-stars{font-size:18px;margin-bottom:14px}
+    .testi-text{font-size:15px;color:var(--text-light);line-height:1.7;margin-bottom:20px;font-style:italic}
+    .testi-author{display:flex;align-items:center;gap:12px}
+    .testi-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px}
+    .testi-name{font-weight:700;font-size:14px;color:var(--green)}
+    .testi-role{font-size:12px;color:var(--text-light)}
+    .cta-section{background:linear-gradient(135deg,var(--green),var(--green-mid));padding:80px 40px;text-align:center;color:white}
+    .cta-section h2{font-family:'Playfair Display',serif;font-size:40px;font-weight:800;margin-bottom:16px}
+    .cta-section p{font-size:17px;opacity:0.9;margin-bottom:32px}
+    @media(max-width:900px){
+      .hero{padding:calc(var(--nav-height)+40px) 20px 60px}
+      .hero-inner{grid-template-columns:1fr;gap:40px}
+      .hero-title{font-size:36px}
+      .hero-circle{width:260px;height:260px;font-size:100px}
+      .programs-grid{grid-template-columns:repeat(2,1fr)}
+      .why-grid,.act-grid{grid-template-columns:1fr}
+      .testi-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+<div id="navbar"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">🌟 Penerimaan Peserta Didik Baru 2025/2026</div>
+      <h1 class="hero-title">Tumbuh Bersama<br><span class="hl">Metode Terbaik</span><br>untuk Si Kecil</h1>
+      <p class="hero-desc">Golden Age Islamic School Montessori hadir dengan metode Montessori berbasis nilai Islami yang terbukti mengoptimalkan tumbuh kembang anak sejak golden age mereka.</p>
+      <div class="hero-btns">
+        <a href="ppdb.html" class="btn-primary">📝 Daftar Sekarang</a>
+        <a href="#programs" class="btn-outline">Lihat Program →</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-circle">🕌</div>
+      <div class="floating-card fc1"><div class="fc-icon" style="background:var(--gold-pale)">⭐</div><div><div style="font-size:18px;color:var(--green)">4.9</div><div style="font-size:11px;color:#aaa">Rating Orang Tua</div></div></div>
+      <div class="floating-card fc2"><div class="fc-icon" style="background:var(--green-pale)">👶</div><div><div style="font-size:13px;color:var(--green)">200+ Siswa Aktif</div><div style="font-size:11px;color:#aaa">TA 2024/2025</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar"><div class="container">
+  <div class="stat-item"><div class="stat-number">10+</div><div class="stat-label">Tahun Berpengalaman</div></div>
+  <div class="stat-item"><div class="stat-number">200+</div><div class="stat-label">Siswa Aktif</div></div>
+  <div class="stat-item"><div class="stat-number">20</div><div class="stat-label">Tenaga Pendidik</div></div>
+  <div class="stat-item"><div class="stat-number">600+</div><div class="stat-label">Alumni Berprestasi</div></div>
+</div></div>
+
+<!-- PROGRAMS -->
+<section style="background:white" id="programs"><div class="container">
+  <div class="section-header">
+    <div class="section-tag">📚 Program Kami</div>
+    <h2 class="section-title">Program <span>Unggulan</span></h2>
+    <p class="section-desc">Program pendidikan Montessori Islami untuk setiap tahap perkembangan anak</p>
+  </div>
+  <div class="programs-grid">
+    <a href="nursery.html" class="program-card"><div class="program-thumb" style="background:linear-gradient(135deg,#c9a84c,#a8832a)">🌱</div><div class="program-body"><div class="program-tag" style="background:var(--gold-pale);color:#a8832a">Usia 2–3 Tahun</div><h3>Nursery Class</h3><p>Pengenalan lingkungan belajar yang aman, nyaman, dan penuh kasih sayang.</p><span class="program-link">Selengkapnya →</span></div></a>
+    <a href="toddler.html" class="program-card"><div class="program-thumb" style="background:linear-gradient(135deg,#52b788,#2d6a4f)">🐣</div><div class="program-body"><div class="program-tag" style="background:var(--green-pale);color:var(--green)">Usia 3–4 Tahun</div><h3>Toddler Class</h3><p>Stimulasi tumbuh kembang optimal melalui metode Montessori yang menyenangkan.</p><span class="program-link">Selengkapnya →</span></div></a>
+    <a href="k1.html" class="program-card"><div class="program-thumb" style="background:linear-gradient(135deg,#1a4d2e,#2d6a4f)">⭐</div><div class="program-body"><div class="program-tag" style="background:var(--green-pale);color:var(--green)">Usia 4–5 Tahun</div><h3>K1</h3><p>Persiapan akademik dasar dengan fondasi karakter Islami yang kokoh.</p><span class="program-link">Selengkapnya →</span></div></a>
+    <a href="k2.html" class="program-card"><div class="program-thumb" style="background:linear-gradient(135deg,#c9a84c,#1a4d2e)">🚀</div><div class="program-body"><div class="program-tag" style="background:var(--gold-pale);color:#a8832a">Usia 5–6 Tahun</div><h3>K2</h3><p>Persiapan komprehensif menuju jenjang Sekolah Dasar dengan metode terbaik.</p><span class="program-link">Selengkapnya →</span></div></a>
+  </div>
+</div></section>
+
+<!-- WHY -->
+<section style="background:var(--cream)"><div class="container why-grid">
+  <div>
+    <div class="section-tag">💚 Mengapa Golden Age?</div>
+    <h2 class="section-title" style="text-align:left;margin-bottom:12px">Keunggulan <span>Kami</span></h2>
+    <p style="color:var(--text-light);margin-bottom:28px;line-height:1.7">Kami berkomitmen memberikan pengalaman belajar terbaik berbasis metode Montessori dan nilai-nilai Islami</p>
+    <div class="why-list">
+      <div class="why-item"><div class="why-icon" style="background:var(--gold-pale)">📖</div><div class="why-text"><h4>Metode Montessori Islami</h4><p>Menggabungkan pendekatan Montessori internasional dengan kurikulum pendidikan agama Islam secara harmonis.</p></div></div>
+      <div class="why-item"><div class="why-icon" style="background:var(--green-pale)">👩‍🏫</div><div class="why-text"><h4>Guru Tersertifikasi Montessori</h4><p>Seluruh tenaga pendidik tersertifikasi Montessori dan berpengalaman dalam pendidikan anak usia dini.</p></div></div>
+      <div class="why-item"><div class="why-icon" style="background:var(--gold-pale)">🌈</div><div class="why-text"><h4>Lingkungan Belajar Ideal</h4><p>Fasilitas lengkap dengan peralatan Montessori asli yang dirancang sesuai tahap perkembangan anak.</p></div></div>
+      <div class="why-item"><div class="why-icon" style="background:var(--green-pale)">🏆</div><div class="why-text"><h4>Akreditasi & Legalitas Lengkap</h4><p>Terdaftar resmi dan terakreditasi oleh lembaga pendidikan yang berwenang.</p></div></div>
+    </div>
+  </div>
+  <div><div class="why-img-box">🎓</div></div>
+</div></section>
+
+<!-- ACTIVITIES -->
+<section style="background:white"><div class="container">
+  <div class="section-header">
+    <div class="section-tag">🎨 Kegiatan</div>
+    <h2 class="section-title">Activities & <span>Afterschool</span></h2>
+    <p class="section-desc">Berbagai kegiatan untuk mengembangkan potensi dan bakat anak secara holistik</p>
+  </div>
+  <div class="act-grid">
+    <a href="activities.html" class="act-card"><div class="act-thumb" style="background:linear-gradient(135deg,var(--gold),#a8832a)">🎨</div><div class="act-body"><h3>Activities</h3><p>Kegiatan seni, sains, dan eksplorasi berbasis Montessori yang mengembangkan kreativitas dan rasa ingin tahu anak.</p><span class="program-link">Lihat Kegiatan →</span></div></a>
+    <a href="afterschool.html" class="act-card"><div class="act-thumb" style="background:linear-gradient(135deg,var(--green),var(--green-mid))">🌟</div><div class="act-body"><h3>Afterschool</h3><p>Program ekstrakurikuler sore hari yang mengembangkan bakat dan minat anak di berbagai bidang.</p><span class="program-link">Lihat Ekskul →</span></div></a>
+  </div>
+</div></section>
+
+<!-- TESTIMONI -->
+<section style="background:var(--cream)"><div class="container">
+  <div class="section-header">
+    <div class="section-tag">💬 Testimoni</div>
+    <h2 class="section-title">Kata <span>Orang Tua</span></h2>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card"><div class="testi-stars">⭐⭐⭐⭐⭐</div><p class="testi-text">"Metode Montessori di Golden Age benar-benar luar biasa. Anak saya jadi lebih mandiri dan percaya diri!"</p><div class="testi-author"><div class="testi-avatar" style="background:var(--gold-pale)">👩</div><div><div class="testi-name">Ibu Fatimah</div><div class="testi-role">Orang tua siswa K2</div></div></div></div>
+    <div class="testi-card"><div class="testi-stars">⭐⭐⭐⭐⭐</div><p class="testi-text">"Guru-gurunya sabar dan profesional. Anak saya sudah hafal banyak surat pendek. Alhamdulillah!"</p><div class="testi-author"><div class="testi-avatar" style="background:var(--green-pale)">👨</div><div><div class="testi-name">Pak Rizky</div><div class="testi-role">Orang tua siswa K1</div></div></div></div>
+    <div class="testi-card"><div class="testi-stars">⭐⭐⭐⭐⭐</div><p class="testi-text">"Fasilitas lengkap, lingkungan Islami, dan metode Montessori yang terbukti. Pilihan terbaik untuk anak kami!"</p><div class="testi-author"><div class="testi-avatar" style="background:var(--gold-pale)">👩</div><div><div class="testi-name">Ibu Nurul</div><div class="testi-role">Orang tua siswa Toddler</div></div></div></div>
+  </div>
+</div></section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Daftarkan Putra-Putri Anda Sekarang! 🌟</h2>
+  <p>Tempat terbatas! Jangan lewatkan PPDB tahun ajaran 2025/2026</p>
+  <a href="ppdb.html" style="background:var(--gold);color:white;padding:14px 36px;border-radius:30px;text-decoration:none;font-weight:700;font-size:16px;display:inline-block;box-shadow:0 6px 20px rgba(201,168,76,0.4);transition:var(--transition)">📝 Daftar Sekarang</a>
+</div>
+
+<div id="footer"></div>
+<script src="main.js"></script>
+<script>renderNavbar(); renderFooter();</script>
+</body>
+</html>

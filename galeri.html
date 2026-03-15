@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galeri – Golden Age Islamic School Montessori</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .filter-bar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+    .filter-btn{padding:8px 20px;border-radius:25px;border:2px solid var(--gray-200);background:white;color:var(--text-light);font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:13px;cursor:pointer;transition:var(--transition)}
+    .filter-btn.active,.filter-btn:hover{background:var(--green);color:white;border-color:var(--green)}
+    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .gallery-item{border-radius:var(--radius-md);overflow:hidden;aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;font-size:60px;cursor:pointer;transition:var(--transition);position:relative;box-shadow:var(--shadow-sm)}
+    .gallery-item:hover{transform:scale(1.03);box-shadow:var(--shadow-md)}
+    .gallery-item img{width:100%;height:100%;object-fit:cover}
+    .gallery-item .overlay{position:absolute;inset:0;background:rgba(26,77,46,0);display:flex;align-items:center;justify-content:center;transition:var(--transition)}
+    .gallery-item:hover .overlay{background:rgba(26,77,46,0.4)}
+    .gallery-item .overlay span{color:white;font-size:32px;opacity:0;transition:var(--transition)}
+    .gallery-item:hover .overlay span{opacity:1}
+    .gallery-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.6));padding:20px 14px 14px;color:white;font-size:13px;font-weight:600;transform:translateY(100%);transition:var(--transition)}
+    .gallery-item:hover .gallery-label{transform:translateY(0)}
+    /* Lightbox */
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;align-items:center;justify-content:center}
+    .lightbox.open{display:flex}
+    .lightbox-img{max-width:90vw;max-height:85vh;border-radius:12px;font-size:100px;display:flex;align-items:center;justify-content:center}
+    .lightbox-close{position:absolute;top:20px;right:24px;color:white;font-size:32px;cursor:pointer;background:none;border:none}
+    @media(max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:600px){.gallery-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div id="navbar"></div>
+<div class="page-hero">
+  <div class="page-hero-tag">📸 Galeri</div>
+  <h1>Galeri <span>Kegiatan</span></h1>
+  <p>Dokumentasi berbagai kegiatan belajar, bermain, dan berkembang bersama di Golden Age Islamic School Montessori</p>
+</div>
+
+<section style="background:white"><div class="container">
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterGaleri('semua',this)">Semua</button>
+    <button class="filter-btn" onclick="filterGaleri('kelas',this)">Kegiatan Kelas</button>
+    <button class="filter-btn" onclick="filterGaleri('islami',this)">Kegiatan Islami</button>
+    <button class="filter-btn" onclick="filterGaleri('outdoor',this)">Outdoor</button>
+    <button class="filter-btn" onclick="filterGaleri('seni',this)">Seni & Kreasi</button>
+    <button class="filter-btn" onclick="filterGaleri('event',this)">Event & Pentas</button>
+  </div>
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="gallery-item" data-cat="kelas" style="background:linear-gradient(135deg,var(--green),var(--green-mid))" onclick="openLight(this,'Kegiatan Montessori di Kelas')"><div class="overlay"><span>🔍</span></div><div class="gallery-label">Kegiatan Montessori di Kelas</div>📚</div>
+    <div class="gallery-item" data-cat="islami" style="background:linear-gradient(135deg,var(--gold),#a8832a)" onclick="openLight(this,'Kegiatan Islami Bersama')"><div class="overlay"><span>🔍</span></div><div class="gallery-label">Kegiatan Islami Bersama</div>🕌</div>
+    <div class="gallery-item" data-cat="outdoor" style="background:linear-gradient(135deg,#52b788,#1a4d2e)" onclick="openLight(this,'Bermain di Outdoor')"><div class="overlay"><span>🔍</span></div><div class="gallery-label">Bermain di Outdoor</div>⚽</div>
+    <div class="gallery-item" data-cat="seni" style="background:linear-gradient(135deg,#c9a84c,#52b788)" onclick="openLight(this,'Seni & Kreasi Anak')"><div class="overlay"><span>🔍</span></div><div class="gallery-label">Seni & Kreasi Anak</div>🎨</div>
+    <div class="gallery-item" data-cat="event" style="background:linear-gradient(135deg,#2d6a4f,#c9a84c)" onclick="openLight(this,'Pentas Seni Tahunan')"><div class="overlay"><span>🔍</span></div><div class="gallery-label">Pentas Seni Tahunan</div>🎭</div>
+    <div class="gallery-item" data-cat="kelas" style="background:linear-gradient(135deg,#1a4d2e,#52b788)" onclick="openLight(this,'Eksplorasi Sains')"><div class="overlay"><span>🔍</span></div><div class="gallery-label">Eksplorasi Sains</div>🔬</div>
+    <div class="gallery-item" data-cat="islami" style="background:linear-gradient(135deg,#a8832a,#c9a84c)" onclick="openLight(this,'Hafalan Bersama')"><div class="overlay"><span>🔍</span></div><div class="gallery-label">Hafalan Bersama</div>📖</div>
+    <div class="gallery-item" data-cat="outdoor" style="background:linear-gradient(135deg,#52b788,#c9a84c)" onclick="openLight(this,'Berkebun Bersama')"><div class="overlay"><span>🔍</span></div><div class="gallery-label">Berkebun Bersama</div>🌿</div>
+    <div class="gallery-item" data-cat="event" style="background:linear-gradient(135deg,#c9a84c,#1a4d2e)" onclick="openLight(this,'Wisuda Mini')"><div class="overlay"><span>🔍</span></div><div class="gallery-label">Wisuda Mini</div>🎓</div>
+  </div>
+  <p style="text-align:center;margin-top:24px;font-size:13px;color:var(--text-light)">[Foto-foto nyata akan ditambahkan setelah konfirmasi dengan pihak sekolah]</p>
+</div></section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-img" id="lightboxContent"></div>
+</div>
+
+<div id="footer"></div>
+<script src="main.js"></script>
+<script>
+  renderNavbar(); renderFooter();
+  function filterGaleri(cat, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.style.display = (cat === 'semua' || item.dataset.cat === cat) ? 'flex' : 'none';
+    });
+  }
+  function openLight(el, label) {
+    document.getElementById('lightbox').classList.add('open');
+    document.getElementById('lightboxContent').innerHTML = el.cloneNode(true).outerHTML;
+  }
+  function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Legalitas – Golden Age Islamic School Montessori</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .legal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .legal-card{background:white;border-radius:var(--radius-md);padding:28px;box-shadow:var(--shadow-sm);transition:var(--transition);border-top:4px solid var(--green)}
+    .legal-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md)}
+    .legal-icon{width:60px;height:60px;border-radius:16px;background:var(--green-pale);display:flex;align-items:center;justify-content:center;font-size:28px;margin-bottom:18px}
+    .legal-card h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--green);margin-bottom:8px}
+    .legal-card .num{font-size:13px;color:var(--text-light);margin-bottom:12px;font-weight:600}
+    .legal-card p{font-size:14px;color:var(--text-light);line-height:1.6}
+    .legal-badge{display:inline-flex;align-items:center;gap:6px;background:var(--green-pale);color:var(--green);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;margin-top:14px}
+    .akre-section{background:linear-gradient(135deg,var(--green),var(--green-mid));border-radius:var(--radius-lg);padding:48px;color:white;text-align:center}
+    .akre-grade{font-family:'Playfair Display',serif;font-size:120px;font-weight:800;color:var(--gold-light);line-height:1}
+    .visi-misi-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+    .vm-card{background:white;border-radius:var(--radius-md);padding:32px;box-shadow:var(--shadow-sm)}
+    .vm-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--green);margin-bottom:16px}
+    .vm-card p{font-size:14px;color:var(--text-light);line-height:1.8}
+    .vm-card ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+    .vm-card ul li{display:flex;gap:10px;font-size:14px;color:var(--text-light);line-height:1.6}
+    .vm-card ul li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+    @media(max-width:900px){.legal-grid{grid-template-columns:repeat(2,1fr)}.visi-misi-grid{grid-template-columns:1fr}}
+    @media(max-width:600px){.legal-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div id="navbar"></div>
+<div class="page-hero">
+  <div class="page-hero-tag">📋 Legalitas</div>
+  <h1>Legalitas & <span>Akreditasi</span></h1>
+  <p>Golden Age Islamic School Montessori beroperasi secara resmi dengan legalitas lengkap dan akreditasi dari lembaga yang berwenang</p>
+</div>
+
+<!-- AKREDITASI -->
+<section style="background:white"><div class="container">
+  <div class="section-header">
+    <div class="section-tag">🏆 Akreditasi</div>
+    <h2 class="section-title">Status <span>Akreditasi</span></h2>
+  </div>
+  <div class="akre-section">
+    <div class="akre-grade">A</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:28px;margin:16px 0 10px">Terakreditasi A</h3>
+    <p style="opacity:0.85;font-size:15px;max-width:480px;margin:0 auto">[Isi dengan detail akreditasi dari sekolah, nomor SK, dan tanggal berlaku akreditasi.]</p>
+  </div>
+</div></section>
+
+<!-- DOKUMEN LEGAL -->
+<section style="background:var(--cream)"><div class="container">
+  <div class="section-header">
+    <div class="section-tag">📄 Dokumen Legal</div>
+    <h2 class="section-title">Legalitas <span>Resmi</span></h2>
+    <p class="section-desc">Semua dokumen legalitas sekolah telah terdaftar dan diverifikasi oleh lembaga yang berwenang</p>
+  </div>
+  <div class="legal-grid">
+    <div class="legal-card"><div class="legal-icon">📋</div><h3>Izin Operasional</h3><div class="num">No: [Nomor Izin]</div><p>[Isi dengan detail izin operasional sekolah dari Dinas Pendidikan setempat.]</p><span class="legal-badge">✓ Aktif</span></div>
+    <div class="legal-card"><div class="legal-icon">🏛️</div><h3>SK Pendirian</h3><div class="num">No: [Nomor SK]</div><p>[Isi dengan Surat Keputusan pendirian sekolah dari pejabat yang berwenang.]</p><span class="legal-badge">✓ Aktif</span></div>
+    <div class="legal-card"><div class="legal-icon">📊</div><h3>NPSN</h3><div class="num">NPSN: [Nomor NPSN]</div><p>Nomor Pokok Sekolah Nasional yang terdaftar di Kemendikbud Republik Indonesia.</p><span class="legal-badge">✓ Terdaftar</span></div>
+    <div class="legal-card"><div class="legal-icon">🏢</div><h3>Akta Notaris Yayasan</h3><div class="num">No: [Nomor Akta]</div><p>[Isi dengan informasi akta notaris yayasan penyelenggara sekolah.]</p><span class="legal-badge">✓ Aktif</span></div>
+    <div class="legal-card"><div class="legal-icon">📝</div><h3>NIB Yayasan</h3><div class="num">NIB: [Nomor NIB]</div><p>Nomor Induk Berusaha yayasan yang terdaftar di sistem OSS Pemerintah Indonesia.</p><span class="legal-badge">✓ Terdaftar</span></div>
+    <div class="legal-card"><div class="legal-icon">🎓</div><h3>Sertifikasi Montessori</h3><div class="num">No: [Nomor Sertifikat]</div><p>[Isi dengan detail sertifikasi Montessori dari lembaga internasional yang diakui.]</p><span class="legal-badge">✓ Tersertifikasi</span></div>
+  </div>
+</div></section>
+
+<!-- VISI MISI -->
+<section style="background:white"><div class="container">
+  <div class="section-header">
+    <div class="section-tag">🎯 Visi & Misi</div>
+    <h2 class="section-title">Visi & <span>Misi</span></h2>
+  </div>
+  <div class="visi-misi-grid">
+    <div class="vm-card">
+      <h3>🌟 Visi</h3>
+      <p>[Isi dengan visi sekolah dari Golden Age Islamic School Montessori. Contoh: Menjadi lembaga pendidikan anak usia dini terkemuka yang mengintegrasikan metode Montessori dengan nilai-nilai Islam untuk melahirkan generasi yang cerdas, berkarakter, dan berakhlak mulia.]</p>
+    </div>
+    <div class="vm-card">
+      <h3>🎯 Misi</h3>
+      <ul>
+        <li>[Isi misi ke-1 dari sekolah]</li>
+        <li>[Isi misi ke-2 dari sekolah]</li>
+        <li>[Isi misi ke-3 dari sekolah]</li>
+        <li>[Isi misi ke-4 dari sekolah]</li>
+        <li>[Isi misi ke-5 dari sekolah]</li>
+      </ul>
+    </div>
+  </div>
+</div></section>
+
+<div id="footer"></div>
+<script src="main.js"></script>
+<script>renderNavbar(); renderFooter();</script>
+</body>
+</html>

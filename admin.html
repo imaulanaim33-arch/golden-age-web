@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin – Golden Age Learning Center</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@400;600;700&display=swap');
+    :root { --yellow:#FFD700; --orange:#FF8C00; --orange-dark:#E65C00; --cream:#FFF8E7; --text:#3D2B00; --text-light:#7A5C1E; --sidebar:#2D1A00; --green:#4CAF50; --red:#F44336; --blue:#2196F3; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Plus Jakarta Sans',sans-serif; background:#F5F5F5; color:var(--text); }
+
+    /* LOGIN */
+    #login { position:fixed; inset:0; background:linear-gradient(135deg,#2D1A00,#5C3300); display:flex; align-items:center; justify-content:center; z-index:9999; }
+    .login-card { background:white; border-radius:24px; padding:48px 40px; width:380px; box-shadow:0 30px 80px rgba(0,0,0,0.4); text-align:center; }
+    .login-logo { width:72px; height:72px; background:linear-gradient(135deg,#FFD700,#FF8C00); border-radius:20px; display:flex; align-items:center; justify-content:center; font-size:36px; margin:0 auto 20px; }
+    .login-title { font-family:'Playfair Display',serif; font-size:24px; font-weight:800; color:var(--green); margin-bottom:6px; }
+    .login-sub { font-size:13px; color:var(--text-light); margin-bottom:28px; }
+    .login-input { width:100%; padding:13px 16px; border:2px solid #FFE0A0; border-radius:12px; font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; background:var(--cream); margin-bottom:14px; outline:none; transition:border-color 0.3s; }
+    .login-input:focus { border-color:var(--gold); background:white; }
+    .login-btn { width:100%; padding:14px; background:linear-gradient(135deg,var(--gold),var(--green)); color:white; border:none; border-radius:12px; font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; font-weight:700; cursor:pointer; }
+    .login-hint { margin-top:14px; font-size:12px; color:#aaa; }
+    #login-err { color:var(--red); font-size:13px; margin-bottom:10px; display:none; }
+
+    /* APP */
+    #app { display:none; min-height:100vh; }
+    .sidebar { width:260px; background:var(--sidebar); min-height:100vh; position:fixed; top:0; left:0; display:flex; flex-direction:column; z-index:100; }
+    .sidebar-logo { padding:22px 18px; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; gap:12px; }
+    .sidebar-logo-icon { width:44px; height:44px; background:linear-gradient(135deg,#FFD700,#FF8C00); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; }
+    .sidebar-logo-text { font-family:'Playfair Display',serif; font-size:14px; font-weight:700; color:#FFD700; line-height:1.2; }
+    .sidebar-logo-text span { display:block; font-size:11px; color:rgba(255,255,255,0.45); font-family:'Plus Jakarta Sans',sans-serif; }
+    .sidebar-nav { flex:1; padding:16px 0; }
+    .nav-section { padding:8px 18px 4px; font-size:10px; font-weight:700; color:rgba(255,255,255,0.3); text-transform:uppercase; letter-spacing:1.5px; }
+    .nav-item { display:flex; align-items:center; gap:12px; padding:11px 18px; color:rgba(255,255,255,0.6); cursor:pointer; transition:all 0.3s; margin:2px 10px; border-radius:12px; font-weight:700; font-size:14px; }
+    .nav-item:hover { background:rgba(255,255,255,0.08); color:white; }
+    .nav-item.active { background:linear-gradient(135deg,var(--gold),var(--green)); color:white; box-shadow:0 4px 12px rgba(255,140,0,0.3); }
+    .nav-item .ni { font-size:18px; }
+    .nav-badge { margin-left:auto; background:var(--red); color:white; font-size:11px; font-weight:700; padding:2px 8px; border-radius:20px; }
+    .sidebar-footer { padding:14px 10px; border-top:1px solid rgba(255,255,255,0.08); }
+    .logout { display:flex; align-items:center; gap:12px; padding:11px 18px; color:rgba(255,255,255,0.5); cursor:pointer; border-radius:12px; transition:all 0.3s; font-size:14px; font-weight:700; }
+    .logout:hover { background:rgba(244,67,54,0.15); color:#FF6B6B; }
+
+    /* MAIN */
+    .main { margin-left:260px; min-height:100vh; }
+    .topbar { background:white; padding:14px 28px; display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 12px rgba(0,0,0,0.06); position:sticky; top:0; z-index:50; }
+    .topbar-title { font-family:'Playfair Display',serif; font-size:20px; font-weight:800; }
+    .admin-pill { display:flex; align-items:center; gap:10px; background:var(--cream); padding:8px 16px; border-radius:25px; }
+    .admin-avatar { width:32px; height:32px; background:linear-gradient(135deg,#FFD700,#FF8C00); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; }
+    .content { padding:28px; }
+    .page { display:none; }
+    .page.active { display:block; }
+
+    /* CARDS */
+    .stat-row { display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-bottom:24px; }
+    .stat-card { background:white; border-radius:18px; padding:22px; box-shadow:0 4px 16px rgba(0,0,0,0.06); display:flex; align-items:center; gap:14px; transition:transform 0.3s; }
+    .stat-card:hover { transform:translateY(-4px); }
+    .stat-icon { width:54px; height:54px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; }
+    .stat-num { font-family:'Playfair Display',serif; font-size:30px; font-weight:800; line-height:1; }
+    .stat-lbl { font-size:12px; color:var(--text-light); font-weight:700; margin-top:4px; }
+    .card { background:white; border-radius:18px; padding:24px; box-shadow:0 4px 16px rgba(0,0,0,0.06); margin-bottom:20px; }
+    .card-title { font-family:'Playfair Display',serif; font-size:18px; font-weight:800; margin-bottom:18px; }
+
+    /* TABLE */
+    table { width:100%; border-collapse:collapse; }
+    th { text-align:left; padding:10px 14px; font-size:12px; font-weight:700; color:var(--text-light); text-transform:uppercase; letter-spacing:0.5px; border-bottom:2px solid #F0E8D0; }
+    td { padding:13px 14px; font-size:14px; border-bottom:1px solid #F5EDD5; }
+    tr:last-child td { border-bottom:none; }
+    tr:hover td { background:#FFF8E7; }
+    .badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:12px; font-weight:700; }
+    .badge.pending { background:#FFF3CC; color:var(--green); }
+    .badge.diterima { background:#E8F5E9; color:#2E7D32; }
+    .badge.ditolak { background:#FFEBEE; color:#C62828; }
+    .abtn { padding:5px 12px; border-radius:8px; border:none; font-family:'Plus Jakarta Sans',sans-serif; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s; margin-right:3px; }
+    .abtn.approve { background:#E8F5E9; color:#2E7D32; }
+    .abtn.approve:hover { background:#4CAF50; color:white; }
+    .abtn.reject { background:#FFEBEE; color:#C62828; }
+    .abtn.reject:hover { background:#F44336; color:white; }
+
+    /* PAGE HEADER */
+    .page-hdr { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+    .page-hdr h2 { font-family:'Playfair Display',serif; font-size:22px; font-weight:800; }
+    .add-btn { background:linear-gradient(135deg,var(--gold),var(--green)); color:white; border:none; padding:10px 22px; border-radius:12px; font-family:'Plus Jakarta Sans',sans-serif; font-size:14px; font-weight:700; cursor:pointer; box-shadow:0 4px 12px rgba(255,140,0,0.3); }
+
+    /* TOAST */
+    .toast { position:fixed; bottom:24px; right:24px; z-index:9999; padding:14px 24px; border-radius:14px; font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:15px; color:white; box-shadow:0 8px 24px rgba(0,0,0,0.2); }
+    .toast.success { background:#4CAF50; }
+    .toast.error { background:#F44336; }
+
+    .empty { text-align:center; padding:40px; color:var(--text-light); font-size:15px; }
+  </style>
+</head>
+<body>
+
+<div id="login">
+  <div class="login-card">
+    <div class="login-logo">🌻</div>
+    <div class="login-title">Admin Panel</div>
+    <div class="login-sub">Golden Age Learning Center</div>
+    <div id="login-err">⚠️ Username atau password salah!</div>
+    <input class="login-input" id="uname" type="text" placeholder="Username" onkeypress="if(event.key==='Enter')doLogin()"/>
+    <input class="login-input" id="upass" type="password" placeholder="Password" onkeypress="if(event.key==='Enter')doLogin()"/>
+    <button class="login-btn" onclick="doLogin()">🔐 Masuk</button>
+    <div class="login-hint">Demo: admin / annahl2025</div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">🌻</div>
+      <div class="sidebar-logo-text">Golden Age LC<span>Admin Panel</span></div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="nav-section">Menu Utama</div>
+      <div class="nav-item active" onclick="showPage('dashboard',this)"><span class="ni">📊</span> Dashboard</div>
+      <div class="nav-item" onclick="showPage('pendaftar',this)" id="nav-pendaftar"><span class="ni">📝</span> Data Pendaftar <span class="nav-badge" id="badge-count">0</span></div>
+      <div class="nav-section" style="margin-top:10px">Lainnya</div>
+      <div class="nav-item" onclick="window.open('index.html','_blank')"><span class="ni">🌐</span> Lihat Website</div>
+    </div>
+    <div class="sidebar-footer">
+      <div class="logout" onclick="doLogout()"><span style="font-size:18px">🚪</span> Keluar</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div class="admin-pill"><div class="admin-avatar">👤</div><div style="font-size:14px;font-weight:700">Admin</div></div>
+    </div>
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <div class="page active" id="page-dashboard">
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-icon" style="background:#FFF3CC">📝</div><div><div class="stat-num" id="stat-total">–</div><div class="stat-lbl">Total Pendaftar</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#FFE0D0">⏳</div><div><div class="stat-num" id="stat-pending">–</div><div class="stat-lbl">Pending</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#E8F5E9">✅</div><div><div class="stat-num" id="stat-diterima">–</div><div class="stat-lbl">Diterima</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#FFEBEE">❌</div><div><div class="stat-num" id="stat-ditolak">–</div><div class="stat-lbl">Ditolak</div></div></div>
+        </div>
+        <div class="card">
+          <div class="card-title">📝 Pendaftar Terbaru</div>
+          <div id="dashboard-table"><div class="empty">⏳ Memuat data...</div></div>
+        </div>
+      </div>
+
+      <!-- PENDAFTAR -->
+      <div class="page" id="page-pendaftar">
+        <div class="page-hdr">
+          <h2>📝 Semua Data Pendaftar</h2>
+          <button class="add-btn" onclick="loadPendaftar()">🔄 Refresh</button>
+        </div>
+        <div class="card">
+          <div id="pendaftar-table"><div class="empty">⏳ Memuat data...</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://ssfiywjmgiogixryssbx.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_Xo3_edCbQl5okm56MkuiLQ_JRWyYwea';
+
+function doLogin() {
+  const u = document.getElementById('uname').value;
+  const p = document.getElementById('upass').value;
+  if (u === 'admin' && p === 'annahl2026') {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    loadDashboard();
+  } else {
+    document.getElementById('login-err').style.display = 'block';
+  }
+}
+
+function doLogout() {
+  if (confirm('Yakin ingin keluar?')) {
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('login').style.display = 'flex';
+  }
+}
+
+function showPage(id, el) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  if (el) el.classList.add('active');
+  const titles = { dashboard: 'Dashboard', pendaftar: 'Data Pendaftar PPDB' };
+  document.getElementById('topbar-title').textContent = titles[id] || id;
+  if (id === 'pendaftar') loadPendaftar();
+}
+
+function showToast(msg, type = 'success') {
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.textContent = (type === 'success' ? '✅ ' : '❌ ') + msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3500);
+}
+
+async function fetchData(params = '') {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/pendaftaran?${params}&order=created_at.desc`, {
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+  });
+  return res.json();
+}
+
+async function updateStatus(id, status) {
+  const res = await fetch(`${SUPABASE_URL}/rest/v1/pendaftaran?id=eq.${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Prefer': 'return=minimal' },
+    body: JSON.stringify({ status })
+  });
+  if (res.ok) { showToast(`Status diubah ke "${status}"!`); loadDashboard(); loadPendaftar(); }
+  else showToast('Gagal mengubah status.', 'error');
+}
+
+function fmtDate(d) { if (!d) return '-'; return new Date(d).toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' }); }
+
+function renderTable(data, container) {
+  if (!data || data.length === 0) { document.getElementById(container).innerHTML = '<div class="empty">📭 Belum ada data pendaftar.</div>'; return; }
+  const rows = data.map(r => `
+    <tr>
+      <td><b>${r.nama_anak}</b></td>
+      <td>${r.program}</td>
+      <td>${r.nama_orangtua}</td>
+      <td><a href="https://wa.me/${r.no_whatsapp?.replace(/\D/g,'')}" target="_blank" style="color:var(--green);font-weight:700">${r.no_whatsapp}</a></td>
+      <td>${fmtDate(r.created_at)}</td>
+      <td><span class="badge ${r.status}">${r.status}</span></td>
+      <td>
+        ${r.status === 'pending' ? `<button class="abtn approve" onclick="updateStatus(${r.id},'diterima')">✓ Terima</button><button class="abtn reject" onclick="updateStatus(${r.id},'ditolak')">✗ Tolak</button>` : ''}
+      </td>
+    </tr>`).join('');
+  document.getElementById(container).innerHTML = `
+    <table>
+      <tr><th>Nama Anak</th><th>Program</th><th>Orang Tua</th><th>WhatsApp</th><th>Tgl Daftar</th><th>Status</th><th>Aksi</th></tr>
+      ${rows}
+    </table>`;
+}
+
+async function loadDashboard() {
+  const data = await fetchData('select=*');
+  if (!Array.isArray(data)) return;
+  document.getElementById('stat-total').textContent = data.length;
+  document.getElementById('stat-pending').textContent = data.filter(d => d.status === 'pending').length;
+  document.getElementById('stat-diterima').textContent = data.filter(d => d.status === 'diterima').length;
+  document.getElementById('stat-ditolak').textContent = data.filter(d => d.status === 'ditolak').length;
+  document.getElementById('badge-count').textContent = data.filter(d => d.status === 'pending').length;
+  renderTable(data.slice(0, 5), 'dashboard-table');
+}
+
+async function loadPendaftar() {
+  document.getElementById('pendaftar-table').innerHTML = '<div class="empty">⏳ Memuat...</div>';
+  const data = await fetchData('select=*');
+  renderTable(Array.isArray(data) ? data : [], 'pendaftar-table');
+}
+</script>
+</body>
+</html>
