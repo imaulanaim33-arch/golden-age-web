@@ -243,8 +243,11 @@
 
     @media(max-width:1024px){
       .hero{grid-template-columns:1fr}
-      .hero-left{padding:calc(var(--nav-height)+56px) 28px 48px}
-      .hero-right{min-height:340px}
+      .hero-left{padding:calc(var(--nav-height)+32px) 24px 36px}
+      .hero-right{min-height:300px}
+      .hero-eyebrow{display:none}
+      .hero-title{font-size:38px;letter-spacing:-1px;margin-bottom:20px}
+      .hero-desc{font-size:14px;margin-bottom:28px}
       .prog-grid{grid-template-columns:repeat(2,1fr)}
       .why-inner{grid-template-columns:1fr;gap:48px}
       .why-right{position:static}
@@ -253,19 +256,11 @@
       .intro-grid{grid-template-columns:1fr}
       .prog-header{flex-direction:column;align-items:flex-start;gap:16px}
     }
-    @media(max-width:768px){
-      .hero-left{padding:calc(var(--nav-height)+44px) 24px 36px}
-      .hero-title{font-size:36px;letter-spacing:-1px}
-      .hero-eyebrow{margin-bottom:16px}
-      .hero-eyebrow span{font-size:10px;letter-spacing:2px}
-      .hero-desc{font-size:13px;margin-bottom:28px;max-width:100%}
-    }
     @media(max-width:600px){
       .prog-grid{grid-template-columns:1fr}
       .hero-stats-bottom{grid-template-columns:1fr 1fr}
-      .hero-left{padding:calc(var(--nav-height)+40px) 20px 32px}
+      .hero-left{padding:calc(var(--nav-height)+24px) 20px 28px}
       .hero-title{font-size:32px;letter-spacing:-0.5px}
-      .hero-eyebrow{margin-bottom:14px}
       section{padding:64px 20px}
     }
   </style>
